@@ -1,5 +1,5 @@
-feature "Log in to redmine page", js: true do
-  scenario "Registered used logs in" do
+feature 'Log in to redmine page', js: true do
+  scenario 'Registered used logs in' do
     visit 'http://10.128.232.50/'
     find(:xpath, '//*[@id="account"]/ul/li[1]/a').click
     fill_in('Login', with: 'user')
