@@ -1,3 +1,5 @@
+
+
 feature "Registering user account", js: true do
 
 
@@ -5,8 +7,7 @@ feature "Registering user account", js: true do
 
     new_timestamp
     user_register("user#{@time}")
-    my_account
-    user_login
+    my_page
 
   end
 
