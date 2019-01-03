@@ -38,3 +38,5 @@ module FeatureHelper
     sleep 3
   end
 end
+
+World FeatureHelper

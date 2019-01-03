@@ -19,7 +19,7 @@ end
 
 Then(/^I see '([^"]*)'$/) do |string|
   if string == 'Logged in as some_random_username'
-    expect(page).to have_content 'random_text' + "#{@time}"
+    expect(page).to have_content "user#{@time}"
   elsif string == 'Reported issues (0)'
     expect(page).to have_content string
   elsif string == 'Issues assigned to me (0)'
@@ -53,7 +53,7 @@ And(/^I fill in '([^"]*)' field with '([^"]*)' text on '([^"]*)' page$/) do |fie
       end
     when 'Redmine register'
     if field == 'Login'
-      @register_page.login_field.set text + "#{@time}"
+      @register_page.login_field.set "user#{@time}"
     elsif field == 'Password'
       @register_page.password_field.set text
     elsif field == 'Password confirmation'
@@ -67,7 +67,7 @@ And(/^I fill in '([^"]*)' field with '([^"]*)' text on '([^"]*)' page$/) do |fie
     end
   when 'Redmine sign in(random user account)'
     if field == 'Login'
-      @login_page.login_field.set text + "#{@time}"
+      @login_page.login_field.set "user#{@time}"
     end
   end
 end
@@ -89,4 +89,8 @@ And(/^I check if the url of page '([^"]*)' ends with '([^"]*)'$/) do |page, url|
   when 'My page'
     expect(@my_page.current_url).to end_with(url)
   end
+end
+
+Given(/^I create user account via api call$/) do
+  create_user_via_api("user#{@time}")
 end
