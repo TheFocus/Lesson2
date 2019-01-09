@@ -73,7 +73,7 @@ And(/^I fill in '([^"]*)' field with '([^"]*)' text on '([^"]*)' page$/) do |fie
 end
 
 
-Given(/^I create temporary unique variable in order to create unique user account$/) do
+Given(/^I create temporary unique variable in order to create unique user data$/) do
   new_timestamp
 end
 

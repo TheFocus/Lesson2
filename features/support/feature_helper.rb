@@ -8,12 +8,11 @@ module FeatureHelper
     @register_page.login_field.set user
     @register_page.password_field.set '1234qwer'
     @register_page.password_confirmation_field.set '1234qwer'
-    @register_page.user_first_name_field.set 'James'
-    @register_page.user_last_name_field.set 'Bond'
+    @register_page.user_first_name_field.set user
+    @register_page.user_last_name_field.set user
     @register_page.user_mail.set user + "@softserveinc.com"
     @register_page.login_button.click
     expect(page).to have_content user
-    sleep 3
   end
   def my_page
     @my_page = MyPage.new
@@ -28,14 +27,13 @@ module FeatureHelper
     @my_account_page.load
     @my_account_page.signout_button.click
   end
-  def user_login
+  def user_login(name = '')
     @login_page = LoginPage.new
     @login_page.load
-    @login_page.login_field.set "user#{@time}"
+    @login_page.login_field.set name + "#{@time}"
     @login_page.password_field.set '1234qwer'
     @login_page.login_button.click
-    expect(page).to have_content 'Logged in as ' + "user#{@time}"
-    sleep 3
+    expect(page).to have_content name + "#{@time}"
   end
 end
 
