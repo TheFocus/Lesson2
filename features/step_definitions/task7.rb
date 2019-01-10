@@ -112,12 +112,3 @@ end
 Then(/^I see it was successfully closed$/) do
   expect(page).to have_content "This project is closed and read-only."
 end
-
-Given(/^I create hash for test purposes$/) do
- create_users_hash
-end
-
-Given(/^I clean database from all user accounts\(except admin account\) and projects$/) do
-  users_cleaning_tool
-  projects_cleaning_tool
-end

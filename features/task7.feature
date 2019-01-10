@@ -3,11 +3,8 @@ Feature: Integration functional testing of Redmine user rights
   I want to be able to create projects, create issues, assign developers to issues, submit time and close issues and projects
   So I can be sure that development life cycle is correctly represented in Redmine
 
+  @task7
   Scenario: Project Admin creates a project assigns a developer to it. Developer completes task and closes it.
-    Given I am not logged in visitor
-    Given I create temporary unique variable in order to create unique user data
-    Given I create hash for test purposes
-    Given I clean database from all user accounts(except admin account) and projects
 
     When  I register 'admin' user via Redmine 'UI'
     Then  I see the 'admin' user is registered
