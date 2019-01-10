@@ -16,6 +16,10 @@ class Projects < SitePrism::Page
   element :submit_issue_change, :xpath, '//*[@id="issue-form"]/input[6]'
   element :close_project_button, :xpath, '//*[@id="content"]/div[1]/a[2]'
 
+  def select_value(value, field)
+    select(value, from: field)
+  end
+
   def checkbox(checkbox_locator)
     page.find('label', text: checkbox_locator)
   end

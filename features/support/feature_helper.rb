@@ -27,13 +27,13 @@ module FeatureHelper
     @my_account_page.load
     @my_account_page.signout_button.click
   end
-  def user_login(name = '')
+  def user_login(name)
     @login_page = LoginPage.new
     @login_page.load
-    @login_page.login_field.set name + "#{@time}"
+    @login_page.login_field.set name + @time.to_s
     @login_page.password_field.set '1234qwer'
     @login_page.login_button.click
-    expect(page).to have_content name + "#{@time}"
+    expect(page).to have_content name + @time.to_s
   end
 end
 

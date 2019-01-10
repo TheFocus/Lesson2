@@ -63,7 +63,7 @@ And(/^I fill in '([^"]*)' field with '([^"]*)' text on '([^"]*)' page$/) do |fie
     elsif field == 'Last name'
       @register_page.user_last_name_field.set text
     elsif field == 'Mail'
-      @register_page.user_mail.set text + "#{@time}" + "@softserveinc.com"
+      @register_page.user_mail.set text + @time.to_s + "@softserveinc.com"
     end
   when 'Redmine sign in(random user account)'
     if field == 'Login'

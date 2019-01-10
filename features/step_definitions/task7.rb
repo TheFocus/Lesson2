@@ -5,19 +5,19 @@ Given(/^I am not logged in visitor$/) do
 end
 
 When(/^I register '([^"]*)' user via Redmine 'UI'$/) do |string|
-  user_register(string + "#{@time}")
+  user_register(string + @time.to_s)
 end
 
 Then(/^I see the '([^"]*)' user is registered$/) do |string|
   case string
   when 'developer'
-    check_user_in_database(string + "#{@time}")
+    check_user_in_database(string + @time.to_s)
   when 'admin'
-    check_ui_registered_user_in_database(string + "#{@time}")
+    check_ui_registered_user_in_database(string + @time.to_s)
   end
   end
 And(/^I become logged in as '([^"]*)' user$/) do |user|
-  expect(page).to have_content user + "#{@time}"
+  expect(page).to have_content user + @time.to_s
 end
 
 When(/^I create a project$/) do
@@ -38,26 +38,26 @@ And(/^I see that project is created on 'API' level$/) do
 end
 
 When(/^I register '([^"]*)' user via Redmine 'API'$/) do |string|
-  create_user_via_api(string + "#{@time}")
+  create_user_via_api(string + @time.to_s)
 end
 
 When(/^I add '([^"]*)' user as a member of the project$/) do |string|
   @projects = Projects.new
   @projects.load(project_name: "a#{@time}", second_arg: 'memberships', third_arg: 'new')
-  @projects.checkbox(string + "#{@time}").click
+  @projects.checkbox(string + @time.to_s).click
   @projects.developer_checkbox.click
   @projects.add_member_button.click
 end
 
 Then(/^I can can see '([^"]*)' user in the project member list$/) do |string|
-  expect(page).to have_content string + "#{@time}"
+  expect(page).to have_content string + @time.to_s
 end
 
 When(/^I create an issue and assign '([^"]*)' user to created issue$/) do |string|
   @projects = Projects.new
   @projects.load(project_name: "a#{@time}", second_arg: 'issues', third_arg: 'new')
-  @projects.subject.set "#{@time}"
-  select(string, from: 'Assignee')
+  @projects.subject.set @time.to_s
+  @projects.select_value(string, 'Assignee')
   @projects.create_issue.click
 end
 
@@ -66,7 +66,7 @@ Then(/^I see the issue is created$/) do
 end
 
 And(/^I see '([^"]*)' user is assigned to the issue$/) do |string|
-  expect(page).to have_content "Assignee:\n" + string + "#{@time}"
+  expect(page).to have_content "Assignee:\n" + string + @time.to_s
 end
 
 When(/^I logout$/) do
@@ -80,10 +80,10 @@ end
 When(/^I track time for the assigned issue$/) do
   @projects = Projects.new
   @projects.load(project_name: "a#{@time}", second_arg: 'issues')
-  click_link("#{@time}")
+  click_link(@time.to_s)
   @projects.log_time_button.click
   @projects.time_entry_hours.set '8'
-  select('Development', from: 'Activity')
+  @projects.select_value('Development', 'Activity')
   @projects.create_time_log.click
 end
 
@@ -93,7 +93,7 @@ end
 
 When(/^I close the issue$/) do
   @projects.edit_button.click
-  select('Closed', from: 'Status')
+  @projects.select_value('Closed', 'Status')
   @projects.submit_issue_change.click
 end
 
